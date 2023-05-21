@@ -1,6 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { persistStore } from 'redux-persist';
-import { filterSlice } from './filter/filterSlice';
+import { persistStore,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER, } from 'redux-persist';
+import { filterSlice } from '../filter/filterSlice';
 
 export const filterStore = configureStore({
   reducer: {

@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-
-import { nanoid } from 'nanoid'; // npm i nanoid
-import ContactForm from "./ContactForm";
-import Filter from "./Filter";
-import ContactList from "./ContactList";
+// import ContactForm from "./ContactForm";
+// import Filter from "./Filter";
+// import ContactList from "./ContactList";
 import './App.css';
 
 
@@ -52,21 +50,22 @@ export default function App() {
   };
 
   return (
-    <>
-      <div className="Container">
-        <section title="Phonebook" className="Section">
-          <h1>Phonebook</h1>
-          <ContactForm onAddContact={addContact} />
-        </section>
-        <section title="Contacts" className="Section">
-          <h2>Contacts</h2>
-          <Filter onChangeFilter={handleChangeFilter} />
-          <ContactList
-            getFilteredContacts={getFilteredContacts}
-            onRemove={handleRemove}
-          />
-        </section>
-      </div>
-    </>
+    <div> heloo Redux</div>
+    // <>
+    //   <div className="Container">
+    //     <section title="Phonebook" className="Section">
+    //       <h1>Phonebook</h1>
+    //       <ContactForm onAddContact={addContact} />
+    //     </section>
+    //     <section title="Contacts" className="Section">
+    //       <h2>Contacts</h2>
+    //       <Filter onChangeFilter={handleChangeFilter} />
+    //       <ContactList
+    //         getFilteredContacts={getFilteredContacts}
+    //         onRemove={handleRemove}
+    //       />
+    //     </section>
+    //   </div>
+    // </>
   );
 }

@@ -1,5 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { persistStore } from 'redux-persist';
+import { persistStore,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER, } from 'redux-persist';
 import { persistedContactsReducer } from '../contacts/contactSlice';
 
 export const contactsStore = configureStore({
