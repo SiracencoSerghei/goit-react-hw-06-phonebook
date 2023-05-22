@@ -1,4 +1,4 @@
-import { createSlice, nanoid } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 // начальное состояние:
@@ -15,7 +15,7 @@ const contactsSlice = createSlice({
       newContact({ name, number }) {
         return {
           payload: {
-            id: nanoid(),
+            id,
             name,
             number,
           },
