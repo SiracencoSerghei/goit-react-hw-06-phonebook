@@ -1,48 +1,39 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-// начальное состояние:
+import { createSlice } from "@reduxjs/toolkit";
+import { nanoid } from "nanoid";
+import { useSelector } from "react-redux";
+
 const initialState = { items: [] };
-// срез (slice) с именем "contacts" и определенными действиями (actions):
-const contactsSlice = createSlice({
-    // Cоздаем срез (slice) с указанным именем "contacts" и начальным состоянием initialState
-  name: 'contacts',
+
+export const contactsSlice = createSlice({
+  name: "contacts",
   initialState,
 
   reducers: {
-    // действие (action) для добавления контакта
     addContact: {
+      reducer(state, action) {
+        const { id, name, number } = action.payload;
+      state.items.push({ id, name, number });
+      },
       newContact({ name, number }) {
         return {
           payload: {
-            id,
+            id:nanoid(),
             name,
             number,
           },
         };
       },
-      reducer(state, { payload }) {
-        state.items.push(payload);
-      },
     },
-    // действие (action) для удаления контакта
-    removeContact(state, { payload }) {
-      state.items = state.items.filter(item => item.id !== payload);
+    removeContact(state, action) {
+      const contactId = action.payload;
+      state.items = state.items.filter((contact) => contact.id !== contactId);
     },
   },
 });
-// конфигурация для redux-persist с указанием ключа и хранилища:
-const persistConfig = {
-  key: 'contacts',
-  storage,
-};
-//  редюсер, который объединяет редюсер из среза и redux-persist:
-export const persistedContactsReducer = persistReducer(
-  persistConfig,
-  contactsSlice.reducer
-);
+
+
 //  действия (actions) для использования в компонентах:
 export const { addContact, removeContact } = contactsSlice.actions;
 
 // Selector getContactsItems, который возвращает массив контактов из состояния
-export const getContactsItems = state => state.contacts.items;
+export const getContactsItems = state => state.contacts.contacts.items;

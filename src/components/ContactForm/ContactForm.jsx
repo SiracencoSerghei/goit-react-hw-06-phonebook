@@ -10,14 +10,37 @@ const ContactForm = ({ onAddContact }) => {
   const [number, setNumber] = useState('');
 
   const contacts = useSelector(getContactsItems);
+  console.log('contacts', contacts);
   const dispatch = useDispatch();
 
-  const onNameChange = evt => {
-    setName(evt.currentTarget.value);
+  const onNameChange = (evt) => {
+    const { value } = evt.currentTarget;
+
+    const isExists = contacts.find(
+      (contact) => contact.name.toLowerCase() === value.toLowerCase()
+    );
+
+    if (isExists) {
+      showInfoMessage(`${value} is already in your phonebook`);
+      return;
+    }
+
+    setName(value);
   };
 
-  const onNumberChange = evt => {
-    setNumber(evt.currentTarget.value);
+  const onNumberChange = (evt) => {
+    const { value } = evt.currentTarget;
+
+    const isExists = contacts.find(
+      (contact) => contact.number === value
+    );
+
+    if (isExists) {
+      showInfoMessage(`Phone number ${value} is already in your phonebook`);
+      return;
+    }
+
+    setNumber(value);
   };
 
   const formReset = () => {
@@ -32,23 +55,8 @@ const ContactForm = ({ onAddContact }) => {
         name: evt.target.name.value,
         number: evt.target.number.value,
       };
-
-    if (
-      contacts.find(
-        contact =>
-          contact.name.toLowerCase() === name.toLowerCase() &&
-          contact.number === number
-      )
-    ) {
-      showInfoMessage('This contact is already in your phonebook');
-      return;
-    }
-
-    if (contacts.find(contact => contact.number === number)) {
-      showInfoMessage('This phone number is already in your phonebook');
-      return;
-    }
-
+console.log('contact', contact);
+    
     dispatch(addContact(contact));
     showSuccessMessage('New contact has been added in your phonebook');
     formReset();

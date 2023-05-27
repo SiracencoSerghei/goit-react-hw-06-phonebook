@@ -15,4 +15,4 @@ export const filterSlice = createSlice({
 export const { changeFilter } = filterSlice.actions;
 
 // Selectors
-export const getFilterValue = state => state.filter.value;
+export const getFilterValue = state => String(state.filter.value.toLowerCase());
